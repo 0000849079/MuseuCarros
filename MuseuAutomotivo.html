@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museu Automotivo</title>
+
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #info {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            z-index: 10;
+            padding: 15px 20px;
+            color: #ffffff;
+            background: rgba(20, 20, 24, 0.85);
+            font-family: Arial, sans-serif;
+            border-left: 4px solid #b7192b;
+            border-radius: 5px;
+            pointer-events: none;
+        }
+
+        #info h2 {
+            margin: 0 0 6px;
+            font-size: 19px;
+        }
+
+        #info p {
+            margin: 0;
+            font-size: 12px;
+            color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="info">
+    <h2>MUSEU AUTOMOTIVO</h2>
+    <p>Galeria de exposição • 5 altares</p>
+</div>
+
+<a-scene
+    background="color: #f5f5f5"
+    renderer="antialias: true; colorManagement: true"
+    shadow="type: pcfsoft"
+    fog="type: linear; color: #f5f5f5; near: 30; far: 65">
+
+    <!-- ================================= -->
+    <!-- ILUMINAÇÃO -->
+    <!-- ================================= -->
+
+    <a-entity
+        light="type: ambient; color: #ffffff; intensity: 0.85">
+    </a-entity>
+
+    <a-entity
+        light="type: directional; color: #ffffff; intensity: 1.8; castShadow: true"
+        position="-5 12 7">
+    </a-entity>
+
+    <!-- Luzes dos altares -->
+    <a-entity
+        light="type: point; color: #fff1d6; intensity: 1.2; distance: 12"
+        position="-6 5 -5">
+    </a-entity>
+
+    <a-entity
+        light="type: point; color: #fff1d6; intensity: 1.2; distance: 12"
+        position="6 5 -5">
+    </a-entity>
+
+    <a-entity
+        light="type: point; color: #ffffff; intensity: 1.5; distance: 15"
+        position="0 6 -14">
+    </a-entity>
+
+    <!-- ================================= -->
+    <!-- SALA BRANCA -->
+    <!-- Dimensões: 24 x 32 metros -->
+    <!-- Entrada em Z positivo -->
+    <!-- ================================= -->
+
+    <!-- Piso -->
+    <a-box
+        position="0 -0.15 -1"
+        width="24"
+        height="0.3"
+        depth="32"
+        color="#eeeeee"
+        shadow>
+    </a-box>
+
+    <!-- Parede do fundo -->
+    <a-box
+        position="0 4.5 -17"
+        width="24"
+        height="9"
+        depth="0.3"
+        color="#ffffff"
+        shadow>
+    </a-box>
+
+    <!-- Parede esquerda -->
+    <a-box
+        position="-12 4.5 -1"
+        width="0.3"
+        height="9"
+        depth="32"
+        color="#f8f8f8"
+        shadow>
+    </a-box>
+
+    <!-- Parede direita -->
+    <a-box
+        position="12 4.5 -1"
+        width="0.3"
+        height="9"
+        depth="32"
+        color="#f8f8f8"
+        shadow>
+    </a-box>
+
+    <!-- Teto -->
+    <a-box
+        position="0 9.1 -1"
+        width="24"
+        height="0.25"
+        depth="32"
+        color="#ffffff">
+    </a-box>
+
+    <!-- ================================= -->
+    <!-- TAPETE VERMELHO CENTRAL -->
+    <!-- ================================= -->
+
+    <a-box
+        position="0 0.025 -1"
+        width="3.2"
+        height="0.05"
+        depth="31.5"
+        color="#a50f25"
+        material="roughness: 0.85"
+        shadow>
+    </a-box>
+
+    <!-- Bordas decorativas do tapete -->
+    <a-box
+        position="-1.52 0.055 -1"
+        width="0.035"
+        height="0.012"
+        depth="31.3"
+        color="#d6b16b">
+    </a-box>
+
+    <a-box
+        position="1.52 0.055 -1"
+        width="0.035"
+        height="0.012"
+        depth="31.3"
+        color="#d6b16b">
+    </a-box>
+
+    <!-- ================================= -->
+    <!-- FUNÇÃO PARA CRIAR ALTARES -->
+    <!-- ================================= -->
+
+    <a-assets>
+        <a-mixin
+            id="material-altar"
+            material="color: #ffffff; metalness: 0.12; roughness: 0.3">
+        </a-mixin>
+    </a-assets>
+
+    <!--
+      Cada altar tem aproximadamente 5,5 x 0,45 x 3,2 m.
+      São plataformas para carros de tamanho real.
+      O ponto central de cada altar é o local de referência
+      para adicionar o respectivo carro futuramente.
+    -->
+
+    <!-- ALTAR 1: ESQUERDA, PRÓXIMO À ENTRADA -->
+    <a-entity id="altar-1" position="-6.2 0 -4">
+
+        <a-box
+            position="0 0.225 0"
+            width="5.5"
+            height="0.45"
+            depth="3.2"
+            mixin="material-altar"
+            shadow>
+        </a-box>
+
+        <!-- Friso inferior -->
+        <a-box
+            position="0 0.08 0"
+            width="5.52"
+            height="0.12"
+            depth="3.22"
+            color="#c5c8cc">
+        </a-box>
+
+        <!-- Borda superior -->
+        <a-box
+            position="0 0.46 0"
+            width="5.35"
+            height="0.025"
+            depth="3.05"
+            color="#d8b66b">
+        </a-box>
+
+        <!-- Identificação -->
+        <a-text
+            value="01"
+            position="0 0.49 1.25"
+            rotation="-90 0 0"
+            align="center"
+            color="#333333"
+            width="2">
+        </a-text>
+
+         <a-entity
+            gltf-model="url(Carros/2015 Dodge Challenger by Grzybek - 1jB8I4t5w4.glb)"
+            position="0 1.34 0"
+            rotation="0 90 0"
+            scale="0.5 0.5 0.5">
+        </a-entity>
+
+    </a-entity>
+    
+
+    <!-- ALTAR 2: DIREITA, PRÓXIMO À ENTRADA -->
+    <a-entity id="altar-2" position="6.2 0 -4">
+
+        <a-box
+            position="0 0.225 0"
+            width="5.5"
+            height="0.45"
+            depth="3.2"
+            mixin="material-altar"
+            shadow>
+        </a-box>
+
+        <a-box position="0 0.08 0"
+            width="5.52" height="0.12" depth="3.22"
+            color="#c5c8cc">
+        </a-box>
+
+        <a-box position="0 0.46 0"
+            width="5.35" height="0.025" depth="3.05"
+            color="#d8b66b">
+        </a-box>
+
+        <a-text value="02"
+            position="0 0.49 1.25"
+            rotation="-90 0 0"
+            align="center" color="#333333" width="2">
+        </a-text>
+
+        <a-entity
+            gltf-model="url(Carros/Nissan GTR by David Sirera - a_HKCtYAv2W.glb)"
+            position="0 1.22 0"
+            rotation="0 270 0"
+            scale="0.92 0.92 0.92">
+        </a-entity>
+
+    </a-entity>
+
+    <!-- ALTAR 3: ESQUERDA, MAIS AO FUNDO -->
+    <a-entity id="altar-3" position="-6.2 0 -10">
+
+        <a-box
+            position="0 0.225 0"
+            width="5.5"
+            height="0.45"
+            depth="3.2"
+            mixin="material-altar"
+            shadow>
+        </a-box>
+
+        <a-box position="0 0.08 0"
+            width="5.52" height="0.12" depth="3.22"
+            color="#c5c8cc">
+        </a-box>
+
+        <a-box position="0 0.46 0"
+            width="5.35" height="0.025" depth="3.05"
+            color="#d8b66b">
+        </a-box>
+
+        <a-text value="03"
+            position="0 0.49 1.25"
+            rotation="-90 0 0"
+            align="center" color="#333333" width="2">
+        </a-text>
+
+        <a-entity
+            gltf-model="url(Carros/Mazda RX-7 by IvOfficial - SnIoWlh7S2.glb)"
+            position="0 0.47 0"
+            rotation="0 90 0"
+            scale="1.46 1.46 1.46">
+        </a-entity>
+
+    </a-entity>
+
+    <!-- ALTAR 4: DIREITA, MAIS AO FUNDO -->
+    <a-entity id="altar-4" position="6.2 0 -10">
+
+        <a-box
+            position="0 0.225 0"
+            width="5.5"
+            height="0.45"
+            depth="3.2"
+            mixin="material-altar"
+            shadow>
+        </a-box>
+
+        <a-box position="0 0.08 0"
+            width="5.52" height="0.12" depth="3.22"
+            color="#c5c8cc">
+        </a-box>
+
+        <a-box position="0 0.46 0"
+            width="5.35" height="0.025" depth="3.05"
+            color="#d8b66b">
+        </a-box>
+
+        <a-text value="04"
+            position="0 0.49 1.25"
+            rotation="-90 0 0"
+            align="center" color="#333333" width="2">
+        </a-text>
+
+        <a-entity
+            gltf-model="url(Carros/Toyota AE86 by IvOfficial - ZEFWmOPSgh.glb)"
+            position="0 0.49 0"
+            rotation="0 270 0"
+            scale="0.3 0.3 0.3">
+        </a-entity>
+
+    </a-entity>
+
+    <!-- ALTAR 5: NO FINAL DO TAPETE -->
+    <a-entity id="altar-5" position="0 0 -14">
+
+        <a-box
+            position="0 0.225 0"
+            width="6.5"
+            height="0.45"
+            depth="3.6"
+            mixin="material-altar"
+            shadow>
+        </a-box>
+
+        <a-box position="0 0.08 0"
+            width="6.52" height="0.12" depth="3.62"
+            color="#c5c8cc">
+        </a-box>
+
+        <a-box position="0 0.46 0"
+            width="6.35" height="0.025" depth="3.45"
+            color="#d8b66b">
+        </a-box>
+
+        <a-text value="05"
+            position="0 0.49 1.45"
+            rotation="-90 0 0"
+            align="center" color="#333333" width="2">
+        </a-text>
+
+        <a-entity
+            gltf-model="url(Carros/CAR Model by Ignition Labs - 5zUWP5UsLg-.glb)"
+            position="0 0.49 0"
+            rotation="0 270 0"
+            scale="0.015 0.015 0.015">
+        </a-entity>
+
+    </a-entity>
+
+    <!-- ================================= -->
+    <!-- ILUMINAÇÃO DECORATIVA NO TETO -->
+    <!-- ================================= -->
+
+    <a-box position="-6 8.85 -4"
+        width="4" height="0.08" depth="0.7"
+        color="#fff4d7">
+    </a-box>
+
+    <a-box position="6 8.85 -4"
+        width="4" height="0.08" depth="0.7"
+        color="#fff4d7">
+    </a-box>
+
+    <a-box position="-6 8.85 -10"
+        width="4" height="0.08" depth="0.7"
+        color="#fff4d7">
+    </a-box>
+
+    <a-box position="6 8.85 -10"
+        width="4" height="0.08" depth="0.7"
+        color="#fff4d7">
+    </a-box>
+
+    <a-box position="0 8.85 -14"
+        width="5" height="0.08" depth="0.7"
+        color="#fff4d7">
+    </a-box>
+
+    <!-- ================================= -->
+    <!-- PLACA NA PAREDE DO FUNDO -->
+    <!-- ================================= -->
+
+    <a-box
+        position="0 6.6 -16.78"
+        width="7"
+        height="1.3"
+        depth="0.08"
+        color="#22262a">
+    </a-box>
+
+    <a-text
+        value="MUSEU AUTOMOTIVO"
+        position="0 6.65 -16.72"
+        align="center"
+        color="#d8b66b"
+        width="8">
+    </a-text>
+
+    <a-text
+        value="EXCELENCIA SOBRE RODAS"
+        position="0 6.25 -16.72"
+        align="center"
+        color="#ffffff"
+        width="5">
+    </a-text>
+
+    <!-- ================================= -->
+    <!-- CÂMERA NA ENTRADA DO MUSEU -->
+    <!-- ================================= -->
+
+    <a-entity
+        id="camera-visitante"
+        camera
+        position="0 1.65 13"
+        look-controls
+        wasd-controls="acceleration: 25"
+        cursor="rayOrigin: mouse">
+
+    </a-entity>
+
+</a-scene>
+
+</body>
+</html>
